@@ -27,17 +27,15 @@ class HomePageTest(unittest.TestCase):
         inputbox = self.browser.find_element_by_id('SearchString')
         self.assertEqual(inputbox.get_attribute('value'),
                          'Search by name')
-        inputbox.click()
+        inputbox.clear()
         inputbox.send_keys('abies')
         inputbox.send_keys(Keys.ENTER)
 
-        import time; time.sleep(10)
+        #import time; time.sleep(3)
 
-        table = self.browser.find_element_by_css_selector("table.ProductListTable")
-        rows = table.find_elements_by_tag_name('tr')
-        self.assertIn('Abies', [row.text for row in rows])
-
-
+        row = self.browser.find_element_by_css_selector("tr.OddRow")
+        cells = row.find_elements_by_tag_name('td')
+        self.assertIn('Abies', [cell.text for cell in cells])
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
